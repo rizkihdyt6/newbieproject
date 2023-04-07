@@ -1,15 +1,8 @@
-
-### PERHATIAN
-- Terima kasih untuk tidak menjual maupun mengenkripsi skrip ini. Saya mendapatkan secara gratis, jadi saya ataupun kalian harus berbagi secara gratis.
-- Script ini .
-- Status servis terkadang miss informasi. Dimana pada status dead tetapi jika dilihat by servis statusnya sudah aktif. Jadi bisa diabaikan
-- Jika mendapatkan error pada status servis dalam jangka panjang, bisa restart servis yang dead.
-
 ### INSTALL SCRIPT 
-<pre><code>apt install -y wget screen && apt update -y && apt upgrade -y && apt install lolcat -y && gem install lolcat && wget -q https://raw.githubusercontent.com/rizkihdyt6/newbieproject/main/main.sh && chmod +x main.sh && screen -S install ./main.sh</code></pre>
+<pre><code>apt install -y wget screen && apt update -y && apt upgrade -y && apt install lolcat -y && gem install lolcat && wget -q https://raw.githubusercontent.com/rizkihdyt6/scupdate/rizki/main.sh && chmod +x main.sh && screen -S install ./main.sh</code></pre>
 
 ### PERINTAH UPDATE 
-<pre><code>wget https://raw.githubusercontent.com/rizkihdyt6/newbieproject/main/update.sh && chmod +x update.sh && ./update.sh</code></pre>
+<pre><code>wget https://raw.githubusercontent.com/rizkihdyt6/scupdate/rizki/update.sh && chmod +x update.sh && ./update.sh</code></pre>
 
 ### TESTED ON OS 
 - UBUNTU 20.04.05
@@ -55,6 +48,3 @@
 ### Lisensi
 Repository ini dilindungi oleh lisensi [PAK POLISI](https://mit-license.org/)
 
-### Credits
-- [Dharak36](https://github.com/dharak36/Xray-core)
-- [Tiarap](https://github.com/pengelana/blocklist)
