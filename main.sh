@@ -14,7 +14,7 @@ red='\e[1;31m'
 green='\e[0;32m'
 clear
   # // Exporint IP AddressInformation
-export IP=$( curl -sS ipinfo.io/ip )
+export IP=$( wget -qO- ipinfo.io/org )
 
 # // Clear Data
 clear
@@ -72,11 +72,11 @@ red='\e[1;31m'
 green='\e[0;32m'
 NC='\e[0m'
 #IZIN SCRIPT
-MYIP=$(curl -sS ipv4.icanhazip.com)
+MYIP=$(wget -qO- ipinfo.io/org)
 echo -e "\e[32mloading...\e[0m"
 clear
 #IZIN SCRIPT
-MYIP=$(curl -sS ipv4.icanhazip.com)
+MYIP=$(wget -qO- ipinfo.io/org)
 echo -e "\e[32mloading...\e[0m"
 clear
 # Version sc
@@ -132,7 +132,6 @@ secs_to_human() {
     echo "Installation time : $((${1} / 3600)) hours $(((${1} / 60) % 60)) minute's $((${1} % 60)) seconds"
 }
 
-clear
 ### System Information
 TANGGAL=$(date '+%Y-%m-%d')
 TIMES="10"
@@ -140,7 +139,7 @@ NAMES=$(whoami)
 IMP="wget -q -O"    
 CHATID="1316596937"
 LOCAL_DATE="/usr/bin/"
-MYIP=$(wget -qO- https://raw.githubusercontent.com/rizkihdyt6/izinsc/main/ip)
+MYIP=$(wget -qO- ipinfo.io/org)
 ISP=$(wget -qO- ipinfo.io/org)
 CITY=$(curl -s ipinfo.io/city)
 TIME=$(date +'%Y-%m-%d %H:%M:%S')

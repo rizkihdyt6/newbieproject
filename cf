@@ -1,6 +1,6 @@
 #!/bin/bash
   # // Exporint IP AddressInformation
-export IP=$( curl -sS ipinfo.io/ip )
+export IP=$( wget -qO- ipinfo.io/org )
 
 # // Clear Data
 clear
@@ -58,11 +58,11 @@ red='\e[1;31m'
 green='\e[0;32m'
 NC='\e[0m'
 #IZIN SCRIPT
-MYIP=$(curl -sS ipv4.icanhazip.com)
+MYIP=$(wget -qO- ipinfo.io/org)
 echo -e "\e[32mloading...\e[0m"
 clear
 #IZIN SCRIPT
-MYIP=$(curl -sS ipv4.icanhazip.com)
+MYIP=$(wget -qO- ipinfo.io/org)
 echo -e "\e[32mloading...\e[0m"
 clear
 # Version sc
