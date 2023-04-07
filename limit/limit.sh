@@ -67,9 +67,9 @@ echo -e "\e[32mloading...\e[0m"
 clear
 # Version sc
 VERSIONSC () {
-    NEWBIEPROJECT=V3.0
+    GEOVPN=V3.0
     IZINVERSION=$(curl https://raw.githubusercontent.com/rizkihdyt6/izinsc/main/ip | grep $MYIP | awk '{print $6}')
-    if [ $GNEWBIEPROJECT = $IZINVERSION ]; then
+    if [ $GEOVPN = $IZINVERSION ]; then
     echo -e "\e[32mReady for script installation version 3.0 (websocket)..\e[0m"
     else
     echo -e "\e[31mYou do not have permission to install script version 3.0 !\e[0m"
