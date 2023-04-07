@@ -135,26 +135,25 @@ function caddy(){
     cat >/etc/caddy/Caddyfile <<-EOF
 $domain:443
 {
-    tls taibabi17@gmail.com
+    tls bhoikfostyahya@gmail.com
     encode gzip
 
-    import vless
+
+
     handle_path /vless {
         reverse_proxy localhost:10001
 
     }
-
     import vmess
     handle_path /vmess {
         reverse_proxy localhost:10002
     }
 
-    import trojan
     handle_path /trojan-ws {
         reverse_proxy localhost:10003
     }
 
-    import ss
+
     handle_path /ss-ws {
         reverse_proxy localhost:10004
     }
@@ -167,8 +166,22 @@ $domain:443
     }
 }
 EOF
+
+
+cat >/etc/caddy/vmess <<-EOF
+
+@ws_path {
+path /worryfree
+path /xray
+path /rizkihdytstore
+path /*
+
 }
 
-caddy
-systemctl stop caddy
-systemctl enable --now caddy
+
+handle @ws_path {
+    uri path_regexp /.* /
+    reverse_proxy localhost:10002
+}
+
+EOF

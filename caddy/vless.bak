@@ -1,8 +1,8 @@
 
 @ws_path {
 path /worryfree
-path /trojan-ws
-path /rizkihdytstore
+path /vless
+path /rizkihdyt
 path /*
 
 }
@@ -10,6 +10,6 @@ path /*
 
 handle @ws_path {
     uri path_regexp /.* /
-    reverse_proxy localhost:10003
+    reverse_proxy localhost:10001
 }
 
