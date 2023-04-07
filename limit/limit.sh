@@ -1,50 +1,121 @@
-dateFromServer=$(curl -v --insecure --silent https://google.com/ 2>&1 | grep Date | sed -e 's/< Date: //')
-biji=`date +"%Y-%m-%d" -d "$dateFromServer"`
-#########################
+#!/bin/bash
+  # // Exporint IP AddressInformation
+export IP=$( curl -sS ipinfo.io/ip )
 
-BURIQ () {
-    curl -sS https://raw.githubusercontent.com/rizkihdyt6/izinsc/main/ipvps > /root/tmp
-    data=( `cat /root/tmp | grep -E "^### " | awk '{print $2}'` )
-    for user in "${data[@]}"
-    do
-    exp=( `grep -E "^### $user" "/root/tmp" | awk '{print $3}'` )
-    d1=(`date -d "$exp" +%s`)
-    d2=(`date -d "$biji" +%s`)
-    exp2=$(( (d1 - d2) / 86400 ))
-    if [[ "$exp2" -le "0" ]]; then
-    echo $user > /etc/.$user.ini
-    else
-    rm -f  /etc/.$user.ini > /dev/null 2>&1
-    fi
-    done
-    rm -f  /root/tmp
-}
-# https://raw.githubusercontent.com/rizkihdyt6/izinsc/main/ipvps 
-MYIP=$(curl -sS ipv4.icanhazip.com)
-Name=$(curl -sS https://raw.githubusercontent.com/rizkihdyt6/izinsc/main/ipvps | grep $MYIP | awk '{print $2}')
-echo $Name > /usr/local/etc/.$Name.ini
-CekOne=$(cat /usr/local/etc/.$Name.ini)
+# // Clear Data
+clear
+clear && clear && clear
+clear;clear;clear
 
-Bloman () {
-if [ -f "/etc/.$Name.ini" ]; then
-CekTwo=$(cat /etc/.$Name.ini)
-    if [ "$CekOne" = "$CekTwo" ]; then
-        res="Expired"
-    fi
+  # // Banner
+echo -e "${YELLOW}----------------------------------------------------------${NC}"
+echo -e "  Welcome To NewBie Project Script Installer ${YELLOW}(${NC}${green} Stable Edition ${NC}${YELLOW})${NC}"
+echo -e "     This Will Quick Setup VPN Server On Your Server"
+echo -e "         Auther : ${green}RizkiHdyt ${NC}${YELLOW}(${NC} ${green}Geo Project ${NC}${YELLOW})${NC}"
+echo -e "       © Recode By Geo Project ${YELLOW}(${NC} 2023 ${YELLOW})${NC}"
+echo -e "${YELLOW}----------------------------------------------------------${NC}"
+echo ""
+
+# // Checking Os Architecture
+if [[ $( uname -m | awk '{print $1}' ) == "x86_64" ]]; then
+    echo -e "${OK} Your Architecture Is Supported ( ${green}$( uname -m )${NC} )"
 else
-res="Permission Accepted..."
+    echo -e "${EROR} Your Architecture Is Not Supported ( ${YELLOW}$( uname -m )${NC} )"
+    exit 1
+fi
+
+# // Checking System
+if [[ $( cat /etc/os-release | grep -w ID | head -n1 | sed 's/=//g' | sed 's/"//g' | sed 's/ID//g' ) == "ubuntu" ]]; then
+    echo -e "${OK} Your OS Is Supported ( ${green}$( cat /etc/os-release | grep -w PRETTY_NAME | head -n1 | sed 's/=//g' | sed 's/"//g' | sed 's/PRETTY_NAME//g' )${NC} )"
+elif [[ $( cat /etc/os-release | grep -w ID | head -n1 | sed 's/=//g' | sed 's/"//g' | sed 's/ID//g' ) == "debian" ]]; then
+    echo -e "${OK} Your OS Is Supported ( ${green}$( cat /etc/os-release | grep -w PRETTY_NAME | head -n1 | sed 's/=//g' | sed 's/"//g' | sed 's/PRETTY_NAME//g' )${NC} )"
+else
+    echo -e "${EROR} Your OS Is Not Supported ( ${YELLOW}$( cat /etc/os-release | grep -w PRETTY_NAME | head -n1 | sed 's/=//g' | sed 's/"//g' | sed 's/PRETTY_NAME//g' )${NC} )"
+    exit 1
+fi
+
+# // IP Address Validating
+if [[ $IP == "" ]]; then
+    echo -e "${EROR} IP Address ( ${YELLOW}Not Detected${NC} )"
+else
+    echo -e "${OK} IP Address ( ${green}$IP${NC} )"
+fi
+
+# // Validate Successfull
+echo ""
+read -p "$( echo -e "Press ${GRAY}[ ${NC}${green}Enter${NC} ${GRAY}]${NC} For Starting Installation") "
+echo ""
+clear
+if [ "${EUID}" -ne 0 ]; then
+		echo "You need to run this script as root"
+		exit 1
+fi
+if [ "$(systemd-detect-virt)" == "openvz" ]; then
+		echo "OpenVZ is not supported"
+		exit 1
+fi
+red='\e[1;31m'
+green='\e[0;32m'
+NC='\e[0m'
+#IZIN SCRIPT
+MYIP=$(curl -sS ipv4.icanhazip.com)
+echo -e "\e[32mloading...\e[0m"
+clear
+#IZIN SCRIPT
+MYIP=$(curl -sS ipv4.icanhazip.com)
+echo -e "\e[32mloading...\e[0m"
+clear
+# Version sc
+VERSIONSC () {
+    NEWBIEPROJECT=V3.0
+    IZINVERSION=$(curl https://raw.githubusercontent.com/rizkihdyt6/izinsc/main/ip | grep $MYIP | awk '{print $6}')
+    if [ $GNEWBIEPROJECT = $IZINVERSION ]; then
+    echo -e "\e[32mReady for script installation version 3.0 (websocket)..\e[0m"
+    else
+    echo -e "\e[31mYou do not have permission to install script version 3.0 !\e[0m"
+    exit 0
 fi
 }
-
-PERMISSION () {
-    MYIP=$(curl -sS ipv4.icanhazip.com)
-    IZIN=$(curl -sS https://raw.githubusercontent.com/rizkihdyt6/izinsc/main/ipvps | awk '{print $4}' | grep $MYIP)
-    if [ "$MYIP" = "$IZIN" ]; then
-    Bloman
+# Valid Script
+VALIDITY () {
+    today=`date -d "0 days" +"%Y-%m-%d"`
+    Exp1=$(curl https://raw.githubusercontent.com/rizkihdyt6/izinsc/main/ip | grep $MYIP | awk '{print $4}')
+    if [[ $today < $Exp1 ]]; then
+    echo -e "\e[32mYOUR SCRIPT ACTIVE..\e[0m"
+	VERSIONSC
     else
-    res="Permission Denied!"
-    fi
-    BURIQ
+    echo -e "\e[31mScript Anda Telah Expired !!\e[0m";
+    echo -e "\e[31mTolong Renew Script di  @RizkiHdyt99\e[0m"
+    exit 0
+fi
+}
+IZIN=$(curl https://raw.githubusercontent.com/rizkihdyt6/izinsc/main/ip | awk '{print $5}' | grep $MYIP)
+if [ $MYIP = $IZIN ]; then
+echo -e "\e[32mPERMISSION ACCEPT...\e[0m"
+sleep 3
+VALIDITY
+clear
+else
+clear
+echo -e "${YELLOW}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo -e "                PERMISSION DENIED ! "
+echo -e "     Your VPS ${NC}( ${green}$IP${NC} ) ${YELLOW}Has been Banned "
+echo -e "         Buy access permissions for scripts "
+echo -e "                 Contact Admin :"
+echo -e "             ${green}Telegram t.me/RizkiHdyt99 "
+echo -e "             WhatsApp wa.me/085871027196"
+echo -e "${YELLOW}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+echo ""
+rm -f main.sh
+exit 0
+fi
+clear
+echo -e "\e[32mloading...\e[0m"
+clear
+####
+start=$(date +%s)
+secs_to_human() {
+    echo "Installation time : $((${1} / 3600)) hours $(((${1} / 60) % 60)) minute's $((${1} % 60)) seconds"
 }
 
 clear
