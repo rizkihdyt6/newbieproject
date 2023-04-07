@@ -57,6 +57,7 @@ setup_dnstt() {
 	chmod +x *
 	mv * /etc/slowdns
 	wget -O /etc/systemd/system/client.service "${REPOS}slowdns/client" >/dev/null 2>&1
+	wget -O /etc/xray/dns.json "${REPOS}slowdns/xraydns" >/dev/null 2>&1
 	wget -O /etc/systemd/system/server.service "${REPOS}slowdns/server" >/dev/null 2>&1
 	sed -i "s/xxxx/$NS_DOMAIN/g" /etc/systemd/system/client.service 
 	sed -i "s/xxxx/$NS_DOMAIN/g" /etc/systemd/system/server.service 
